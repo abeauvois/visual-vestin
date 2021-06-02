@@ -4,6 +4,7 @@ import { motion, AnimateSharedLayout } from "framer-motion";
 import "./styles.css";
 import { useViewportWidth } from "./use-viewport-width";
 import { CardBox } from "./atoms";
+import { ValueLogoLabel } from "./molecules/ValueLogoLabel";
 import { ETHER, DAI } from "./data/Tokens";
 
 const HEIGHT = 300;
@@ -97,7 +98,7 @@ function Zone({ values, color, isSelected, onViewportBoxUpdate }) {
               dragElastic={1}
               onViewportBoxUpdate={onViewportBoxUpdate}
             >
-              {/* <ValueLogoLabel value={value} /> */}
+              <ValueLogoLabel value={value} />
             </CardBox>
           );
         })}
