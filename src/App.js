@@ -5,6 +5,7 @@ import { useViewportWidth } from "./use-viewport-width";
 const HEIGHT = 300;
 
 const initialBanqueValues = [
+  { amount: 300 }
   // { amount: 300, currency: ETHER },
   // { amount: 500, currency: DAI }
 ];
@@ -21,7 +22,7 @@ function App() {
       setActiveHalf("0");
     }
     if (activeHalf === "0" && y.min > HEIGHT) {
-      setValues((x) => ({ amount: x.amount / 2, currency: "BTC" }));
+      //setValues((x) => ({ amount: x.amount / 2, currency: "BTC" }));
       setActiveHalf("a");
     }
 
@@ -36,7 +37,7 @@ function App() {
     }
   };
 
-  return <div>test</div>;
+  return <div>test {values[0].amount}</div>;
 }
 
 export default App;
