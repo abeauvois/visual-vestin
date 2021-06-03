@@ -3,24 +3,55 @@ import { motion, AnimateSharedLayout } from "framer-motion";
 
 import "./styles.css";
 import { useViewportWidth } from "./use-viewport-width";
-import { CardBox } from "./atoms";
+import { ValueBox } from "./atoms";
 import { ValueLogoLabel } from "./molecules/ValueLogoLabel";
-import { ETHER, DAI } from "./data/Tokens";
+import { ETHER, DAI, USDC } from "./data/Tokens";
 
 const HEIGHT = 300;
 
 const initialBanqueValues = [
-  { amount: 300, currency: ETHER },
+  { amount: 300, currency: USDC },
   { amount: 500, currency: DAI }
 ];
+
+function Zone({ values, color, isSelected, onViewportBoxUpdate }) {
+  return (
+    <div className="sub-container">
+      <div className="overlay" />
+      {
+        values.map((value) => {
+          console.log(value);
+          return isSelected && (
+            <ValueBox
+              key={value.currency.symbol}
+              className="box"
+              layoutId="box"
+              initial={false}
+              animate={{ backgroundColor: color }}
+              drag
+              // Snap the box back to its center when we let go
+              dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+              // Allow full movememnt outside constraints
+              dragElastic={1}
+              onViewportBoxUpdate={onViewportBoxUpdate}
+            >
+              <ValueLogoLabel value={value} />
+            </ValueBox>
+          );
+        })}
+    </div>
+  );
+}
 
 function App() {
   const viewportWidth = useViewportWidth();
   const [activeHalf, setActiveHalf] = useState("0");
   const [values, setValues] = useState(initialBanqueValues);
 
-  const onViewportBoxUpdate = ({ x, y }) => {
+  const onViewportBoxUpdate = (box, delta) => {
+    const { x, y } = box;
     const halfViewport = viewportWidth.current / 3;
+    //console.log(box, delta);
 
     if (y.max < HEIGHT) {
       setActiveHalf("0");
@@ -78,32 +109,6 @@ function App() {
   );
 }
 
-function Zone({ values, color, isSelected, onViewportBoxUpdate }) {
-  return (
-    <div className="sub-container">
-      <motion.div className="overlay" />
-      {isSelected &&
-        values.map((value) => {
-          return (
-            <CardBox
-              key={value.currency.symbol}
-              className="box"
-              layoutId="box"
-              initial={false}
-              animate={{ backgroundColor: color }}
-              drag
-              // Snap the box back to its center when we let go
-              dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-              // Allow full movememnt outside constraints
-              dragElastic={1}
-              onViewportBoxUpdate={onViewportBoxUpdate}
-            >
-              <ValueLogoLabel value={value} />
-            </CardBox>
-          );
-        })}
-    </div>
-  );
-}
+
 
 export default App;
