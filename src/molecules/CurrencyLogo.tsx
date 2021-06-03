@@ -51,9 +51,9 @@ function CurrencyLogo({
 }) {
   const [, refresh] = useState<number>(0);
 
-  // if (currency === ETHER) {
-  //   return <StyledEthereumLogo src={EthereumLogo} size={size} {...rest} />;
-  // }
+  //  if (currency === ETHER) {
+  //    return <StyledEthereumLogo src={EthereumLogo} size={size} {...rest} />;
+  //  }
 
   if (currency instanceof Token) {
     let uri: string | undefined;

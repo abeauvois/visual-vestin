@@ -20,13 +20,13 @@ export const Row = styled("div")`
   padding: 1rem;
 `;
 
-export const CardBox = styled(motion.div)`
+export const ValueBox = styled(motion.div)`
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 `;
 
-export const IconBox = styled(motion.div)`
+export const IconBox = styled("div")`
   width: 100%;
   height: 100%;
   color: white;
